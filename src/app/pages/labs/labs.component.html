@@ -1,0 +1,163 @@
+<div class="container">
+  <h1>Hola</h1>
+
+  <ul>
+    <li *ngFor="let task of tasks() index as i">
+      {{i}} {{ task }}
+    </li>
+  </ul>
+
+
+<hr />
+
+<h2>{{'Hola'.repeat(4) }}</h2>
+<p>la suma de 3 + 3 es {{ 3 +3 }}</p>
+<p>hola soy {{name() }} y tengo {{age}} años</p>
+
+<hr />
+
+<img [src]="person().avatar" alt="">
+
+<hr />
+<input type="text" [value]="person.name">
+
+<button [disabled]="disabled">Click me</button>
+
+
+<hr/>
+
+<button (click)="clickHandler()">click me</button>
+<button (dblclick)="clickHandler()">click me</button>
+
+<hr />
+<p>(change)</p>
+<input type="number" [value]="person().age" (change)="changeHandler($event)">
+
+<p>(keydown)</p>
+<input type="text" [value]="person().name" (keydown)="keydowHandler($event)">
+
+<p>(keydown)</p>
+<input type="text" [value]="person().name" (keydown.shift.t)="clickHandler()">
+
+
+<hr />
+<h1>Signal</h1>
+<input type="text" [value]="name()" (change)="changeHandler($event)">
+<p>{{name()}}</p>
+</div>
+
+ <ul>
+  <p>total:{{tasks().length}}</p>
+    <li *ngFor="let task of tasks() index as i">
+      {{ i }} {{ task }}
+    </li>
+  </ul>
+
+  <div *ngIf="1 !==1">
+    My content
+  </div>
+
+  <input type="number" [value]="person().age" (change)="changeAge($event)">
+
+  <div *ngIf = "person().name ==='Edward' && person().age > 18; else  elseBlock">
+
+    Soy mayor
+  </div>
+
+  <h2>Ig else new</h2>
+
+ 
+  @if("name()==='nicolas'"){
+    <div>Soy nicolas</div>
+  }
+
+
+
+
+  <ng-template #elseBlock>
+    soy Edward y soy menor de 18
+  </ng-template>
+
+
+  @if(person().name ==='Edward' && person().age > 18) {
+    <div>Soy nicolas y soy mayor de 18</div>
+  } @else {
+    <div>Soy Edward y soy menor de 18</div>
+  }
+
+  <hr />
+  <input type="text" [value]="person().name" (change)="changeName($event)">
+
+  <div [ngSwitch]="person().name">
+      <p *ngSwitchCase="'Edward'"> YO soy Edward</p>
+      <p *ngSwitchCase="'julian'"> YO soy julian</p>
+      <p *ngSwitchCase="'ana'"> YO soy ana</p>
+      <p *ngSwitchCase="'valentina'"> YO soy valentina</p>
+      <p *ngSwitchDefault>Yo no soy nadie</p>
+    </div>
+
+  <hr />
+
+  <input type="color" [formControl]="colorCtrl">
+  <p>color:{{colorCtrl.value}}</p>
+
+  <svg>
+    <g>
+        <rect x="0" y="0" height="100" width="100" [attr.fill]="colorCtrl.value"/>
+    </g>  
+</svg>
+
+<hr />
+
+<input type="number" [formControl]="widthCtrl">
+<span class="box" [style.width.px]="widthCtrl.value"></span>
+
+<hr />
+<p>
+  <input type="text" [formControl]="nameCtrl"><br />
+  <span class="message-error" [class.show]="nameCtrl.invalid && nameCtrl.touched">Nombre invalido</span>
+</p>
+
+<p>
+  <input type="text" [formControl]="nameCtrl"><br />
+
+</p>
+
+<ul>
+  <p>total:{{tasks().length}}</p>
+    <li *ngFor="let task of tasks() index as i">
+      {{ i }} {{ task }}
+    </li>
+  </ul>
+
+  @for(task of tasks(); track task; let i = $index){
+    <li> {{ i}}  {{ task}}</li>
+  } @empty {
+    <li><strong>la lista esta en vacio</strong></li>
+  }
+
+  <hr />
+
+  <div [ngSwitch]="person().name">
+      <p *ngSwitchCase="'Edward'"> YO soy Edward</p>
+      <p *ngSwitchCase="'julian'"> YO soy julian</p>
+      <p *ngSwitchCase="'ana'"> YO soy ana</p>
+      <p *ngSwitchCase="'valentina'"> YO soy valentina</p>
+      <p *ngSwitchDefault>Yo no soy nadie</p>
+    </div>
+
+    @switch(person().name){
+
+      @case('nicolas'){
+        <p>yo soy nicolas</p>
+      }
+      @case('julian'){
+        <p>yo soy julian</p>
+      }
+      @case('ana'){
+        <p>yo soy ana</p>
+      }
+      @default {
+        <p>yo no soy nadie</p>
+      }
+    }

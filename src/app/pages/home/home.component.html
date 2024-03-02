@@ -1,0 +1,70 @@
+<section class="todoapp">
+  <header class="header">
+    <div class="container">
+      <h1>Lista de tareas para llegar a nuestras metas</h1>
+      <p>Fecha y hora al realizar la tarea : <strong>{{  formattedDate}}</strong></p>
+      <input  
+        class="new-todo"
+        placeholder="Escribe la tarea a realizar"
+        autofocus
+        type="text"
+        [formControl]="newTaskCtrl"
+        (keydown.enter)="changeHnadler()"
+      />
+    </div>
+  </header>
+
+  <div class="container todoapp-wrapper">
+    <!-- This section should be hidden by default and shown when there are todos -->
+
+    <section class="main">
+      <ul class="todo-list">
+        <li 
+        (dblclick)="updateTaskEditingMode(i)"
+        *ngFor="let task of taskByFilter(); index as i" 
+        [class.editing]="task.editing"
+        [class.completed] ="task.completed">
+          <div class="view">
+            <input  (change)="updateTask(i)" class="toggle" type="checkbox" [checked]="task.completed"  />
+            <label>{{task.title}}</label>
+            <button class="destroy"(click)="deleteTask(i)"></button>
+          </div>
+          <input class="edit"(keydown.enter)="updateTaskTex(i , $event)" [value]="task.title" />
+        </li>
+      </ul>
+    </section>
+
+    <footer class="footer" *ngIf="taskByFilter().length > 0">
+      <span class="todo-count">
+        <strong>{{taskByFilter().length}}</strong> 
+        <span *ngIf="taskByFilter().length === 1; else elseBlock">item</span>
+        <ng-template #elseBlock>items</ng-template>
+      </span>
+      
+      <ul class="filters">
+        <li>
+          <a (click)="changeFilter('all')" [class.selected]="filter() === 'all'">Todas las tareas</a>
+        </li>
+        <li>
+          <a (click)="changeFilter('pending')"  [class.selected]="filter() === 'pending'">Pendientes</a>
+        </li>
+        <li>
+          <a (click)="changeFilter('completed')"  [class.selected]="filter() === 'completed'">Completadas</a>
+        </li>
+      </ul>
+    </footer> 
+  </div>
+
+  <section class="imagenes">
+    <img src="../../../assets/imagenes/4.jpeg" alt=""> 
+    <img src="../../../assets/imagenes/2.jpeg" alt=""> 
+    <img src="../../../assets/imagenes/3.jpeg" alt="">
+  </section>
+
+  <audio controls autoplay>
+  <source src="../../../assets/imagenes/taylor.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+
+</section>
